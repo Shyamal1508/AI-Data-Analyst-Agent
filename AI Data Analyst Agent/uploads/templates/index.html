@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Data Analyst</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <Style>/* src/styles.css - Cyberpunk Dark Tech Theme */
+
+/* === Reset & Base === */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+}
+
+body {
+    background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 100%);
+    color: #e0e7ff;
+    line-height: 1.6;
+    padding: 2rem;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%232a2a4a" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>') repeat;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* === Main Container === */
+.max-w-6xl {
+    max-width: 80rem;
+}
+
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bg-white {
+    background: rgba(20, 20, 40, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.shadow-xl {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 15px rgba(59, 130, 246, 0.1);
+}
+
+.rounded-lg {
+    border-radius: 1rem;
+}
+
+.p-8 {
+    padding: 2.5rem;
+}
+
+/* === Typography === */
+.text-4xl {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    font-weight: 700;
+    background: linear-gradient(90deg, #60a5fa, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.text-2xl {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #c7d2fe;
+}
+
+.text-xl {
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: #a5b4fc;
+}
+
+.text-lg {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: #94a3b8;
+}
+
+.text-sm {
+    font-size: 0.875rem;
+    color: #94a3b8;
+}
+
+.font-bold { font-weight: 700; }
+.font-semibold { font-weight: 600; }
+.font-medium { font-weight: 500; }
+
+.text-center { text-align: center; }
+
+.text-gray-800 { color: #e0e7ff; }
+.text-gray-700 { color: #c7d2fe; }
+.text-gray-600 { color: #94a3b8; }
+.text-gray-500 { color: #64748b; }
+
+.text-blue-600 { color: #60a5fa; }
+.text-green-600 { color: #34d399; }
+.text-red-700 { color: #f87171; }
+
+.hover\:underline:hover { text-decoration: underline; }
+.hover\:text-red-600:hover { color: #f87171; }
+
+.mb-6 { margin-bottom: 1.75rem; }
+.mb-4 { margin-bottom: 1.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mt-6 { margin-top: 1.75rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-1 { margin-top: 0.375rem; }
+
+/* === Grid === */
+.grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+
+@media (min-width: 768px) {
+    .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .md\:col-span-2 { grid-column: span 2; }
+}
+
+.gap-6 { gap: 1.75rem; }
+.gap-4 { gap: 1.25rem; }
+
+/* === Form Elements === */
+.block { display: block; }
+.w-full { width: 100%; }
+
+.rounded-md { border-radius: 0.75rem; }
+.border { border: 1px solid #374151; }
+.border-gray-300 { border-color: #374151; }
+
+input, select, textarea {
+    background: rgba(30, 30, 60, 0.7);
+    border: 1px solid #4b5563;
+    color: #e0e7ff;
+    padding: 0.75rem 1rem;
+    font-size: 0.9375rem;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(4px);
+}
+
+input::placeholder, textarea::placeholder {
+    color: #64748b;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.3), 0 0 15px rgba(96, 165, 250, 0.2);
+    transform: scale(1.005);
+}
+
+select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.75rem center;
+    background-repeat: no-repeat;
+    background-size: 1.25em;
+    padding-right: 2.5rem;
+    appearance: none;
+}
+
+/* File Input */
+input[type="file"] {
+    padding: 0.5rem;
+    background: rgba(30, 30, 60, 0.7);
+    border: 1px dashed #4b5563;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+    background: #1e40af;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    margin-right: 1rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+input[type="file"]::-webkit-file-upload-button:hover {
+    background: #1d4ed8;
+    box-shadow: 0 0 10px rgba(29, 78, 216, 0.5);
+}
+
+/* === Buttons === */
+button[type="submit"] {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white;
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.6);
+}
+
+button[type="submit"]::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: 0.5s;
+}
+
+button[type="submit"]:hover::before {
+    left: 100%;
+}
+
+/* === Links === */
+a {
+    color: #60a5fa;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+a:hover {
+    color: #a78bfa;
+    text-shadow: 0 0 8px rgba(167, 139, 250, 0.5);
+}
+
+/* === Sections === */
+.bg-gray-50 {
+    background: rgba(30, 30, 60, 0.6);
+    border: 1px solid #374151;
+    border-radius: 0.75rem;
+}
+
+.border-l-4 {
+    border-left: 4px solid #f87171;
+}
+
+.bg-red-100 {
+    background: rgba(127, 29, 29, 0.3);
+    border-color: #f87171;
+}
+
+.p-4 {
+    padding: 1.25rem;
+}
+
+.overflow-x-auto {
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #4b5563 #1f2937;
+}
+
+.overflow-x-auto::-webkit-scrollbar {
+    height: 8px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-track {
+    background: #1f2937;
+    border-radius: 4px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb {
+    background: #4b5563;
+    border-radius: 4px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb:hover {
+    background: #60a5fa;
+}
+
+/* === Chat Bubbles === */
+.chat-user, .chat-assistant {
+    max-width: 85%;
+    padding: 1rem 1.25rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    position: relative;
+    animation: fadeIn 0.3s ease;
+}
+
+.chat-user {
+    background: linear-gradient(135deg, #1e3a8a, #1e40af);
+    margin-left: auto;
+    border-bottom-right-radius: 0.25rem;
+    box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
+}
+
+.chat-assistant {
+    background: linear-gradient(135deg, #166534, #15803d);
+    margin-right: auto;
+    border-bottom-left-radius: 0.25rem;
+    box-shadow: 0 4px 15px rgba(22, 101, 52, 0.3);
+}
+
+.chat-user strong, .chat-assistant strong {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+}
+
+.chat-user pre, .chat-assistant pre {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+pre, code {
+    font-family: 'JetBrains Mono', monospace !important;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* === Code Block === */
+.bg-gray-900 {
+    background: #0d1117;
+    border: 1px solid #30363d;
+}
+
+.text-white pre code {
+    color: #f0f6fc !important;
+}
+
+/* === Details/Summary === */
+details {
+    margin: 1.5rem 0;
+    background: rgba(30, 30, 60, 0.5);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    border: 1px solid #374151;
+}
+
+summary {
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    font-weight: 500;
+    color: #94a3b8;
+    background: rgba(55, 65, 81, 0.5);
+    transition: 0.2s;
+}
+
+summary:hover {
+    color: #60a5fa;
+    background: rgba(96, 165, 250, 0.1);
+}
+
+details[open] summary {
+    border-bottom: 1px solid #374151;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+    body { padding: 1rem; }
+    .p-8 { padding: 1.5rem; }
+    .text-4xl { font-size: 2rem; }
+    .grid-cols-1 { gap: 1rem; }
+}
+
+/* Fix malformed class */
+div[class*="div_"] { margin-bottom: 1.75rem; }
+
+/* Plot Cards */
+.border.rounded-lg.p-2.shadow-sm {
+    background: rgba(15, 15, 35, 0.8);
+    border: 1px solid #374151;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.border.rounded-lg.p-2.shadow-sm:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(96, 165, 250, 0.2);
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}</style>
+</head>
+<body class="bg-gray-100 p-8 font-sans" style="background-color: orangered;"   >
+>
+    <div class="max-w-6xl mx-auto bg-white shadow-xl rounded-lg p-8">
+        
+        <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">
+            AI Data Analyst Agent
+        </h1>
+        <p class="text-center text-gray-600 mb-6">
+            Upload your CSV, get instant analysis, and chat with your data.
+        </p>
+
+        <div class="text-center mb-6">
+            <a href="/search" class="text-blue-600 hover:underline">Go to Web Search Agent &rarr;</a>
+        </div>
+
+
+        <div class="border rounded-lg p-6 bg-gray-50 mb-8">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">1. Upload & Configure</h2>
+            <form action="/" method="POST" enctype="multipart/form-data">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="api_key" class="block text-sm font-medium text-gray-700">Groq API Key</label>
+                        <input type="password" name="api_key" id="api_key" placeholder="gsk_..."
+                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+                    </div>
+                    
+                    <div>
+                        <label for="file" class="block text-sm font-medium text-gray-700">Upload CSV File</label>
+                        <input type="file" name="file" id="file" accept=".csv,.xlsx,.json"
+                               class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label for="target_variable" class="block text-sm font-medium text-gray-700">
+                            Select Target Variable (for Auto-Plots)
+                        </label>
+                        <select name="target_variable" id="target_variable"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+                            <option value="">-- None --</option>
+                            {% for col in column_names %}
+                            <option value="{{ col }}">{{ col }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label for="query" class="block text-sm font-medium text-gray-700">Ask a question about your data:</label>
+                        <textarea name="query" id="query" rows="3"
+                                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                  placeholder="e.g., 'What is the average age?' or 'Plot a histogram of BMI'"></textarea>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex justify-between items-center">
+                    <button type="submit"
+                            class="inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-6 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                        Analyze
+                    </button>
+                    <a href="/clear" class="text-sm text-gray-500 hover:text-red-600">Clear Chat History</a>
+                </div>
+            </form>
+        </div>
+
+        <div>
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">2. Analysis & Results</h2>
+
+            {% if message %}
+            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6" role="alert">
+                <p class="font-bold">Error</p>
+                <p>{{ message }}</p>
+            </div>
+            {% endif %}
+
+            <div class_="mb-6">
+                <div class="border-b border-gray-200">
+                    <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                        </nav>
+                </div>
+                
+                {% if df_preview_html %}
+                <div id="preview" class="mt-6">
+                    <h3 class="text-xl font-semibold mb-2">Data Preview (First 5 Rows):</h3>
+                    <div class="border rounded p-4 bg-white overflow-x-auto">
+                        {{ df_preview_html|safe }}
+                    </div>
+                </div>
+                {% endif %}
+                
+                {% if summary_html %}
+                <div id="summary" class="mt-6">
+                    <h3 class="text-xl font-semibold mb-2">Statistical Summary:</h3>
+                    <div class="border rounded p-4 bg-white overflow-x-auto">
+                        {{ summary_html|safe }}
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if auto_plots_html %}
+                <div id="autoplots" class="mt-6">
+                    <h3 class="text-xl font-semibold mb-2">Automatic Visualizations:</h3>
+                    <div class="border rounded p-4 bg-white grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {% for plot in auto_plots_html %}
+                            <div class="border rounded-lg p-2 shadow-sm">
+                                {{ plot|safe }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if chat_history or result_html or plot_html %}
+                <div id="chat" class="mt-6">
+                    <h3 class="text-xl font-semibold mb-2">Chat & Custom Results:</h3>
+                    
+                    {% if plot_html %}
+                        <h4 class="text-lg font-medium mb-2">Your Custom Plot:</h4>
+                        <div class="border rounded p-4 bg-white mb-4">
+                            {{ plot_html|safe }}
+                        </div>
+                    {% endif %}
+                    
+                    {% if result_html %}
+                        <h4 class="text-lg font-medium mb-2">Your Custom Result:</h4>
+                        <div class="border rounded p-4 bg-white mb-4 overflow-x-auto">
+                            {{ result_html|safe }}
+                        </div>
+                    {% endif %}
+                    
+                    {% if code_generated %}
+                        <details class="mb-4">
+                            <summary class="cursor-pointer text-sm text-gray-600 hover:text-gray-900">Show/Hide Generated Code</summary>
+                            <pre class="bg-gray-900 text-white p-4 rounded-lg mt-2 overflow-x-auto text-sm"><code>{{ code_generated }}</code></pre>
+                        </details>
+                    {% endif %}
+                    
+                    <h4 class="text-lg font-medium mb-2">Full Chat History:</h4>
+                    <div class="space-y-4">
+                        {% for msg in chat_history %}
+                            {% if msg.role == 'user' %}
+                                <div class="chat-user p-4 rounded-lg">
+                                    <strong class="text-blue-600">You:</strong>
+                                    <pre class="whitespace-pre-wrap font-sans text-sm">{{ msg.content }}</pre>
+                                </div>
+                            {% elif msg.role == 'assistant' %}
+                                <div class="chat-assistant p-4 rounded-lg">
+                                    <strong class="text-green-600">Agent:</strong>
+                                    <pre class="bg-gray-900 text-white p-3 rounded-md mt-2 overflow-x-auto text-sm"><code>{{ msg.content }}</code></pre>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

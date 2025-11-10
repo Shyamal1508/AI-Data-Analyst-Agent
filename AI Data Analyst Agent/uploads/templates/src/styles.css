@@ -1,0 +1,98 @@
+/* General Page Styling */
+body {
+    background: linear-gradient(to bottom right, #eef2ff, #f8fafc);
+    font-family: 'Inter', sans-serif;
+}
+
+/* Container Card Styling */
+.max-w-6xl {
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+.max-w-6xl:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Buttons */
+button[type="submit"] {
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+button[type="submit"]:hover {
+    transform: translateY(-1px);
+}
+a:hover {
+    transition: color 0.2s ease;
+}
+
+/* Form Inputs */
+input, select, textarea {
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+input:focus, select:focus, textarea:focus {
+    border-color: #2563eb !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+/* Chat Message Styling */
+.chat-user {
+    background-color: #f3f4f6;
+    border-left: 5px solid #3b82f6;
+    transition: background-color 0.2s;
+}
+
+.chat-assistant {
+    background-color: #f9fafb;
+    border-left: 5px solid #10b981;
+    transition: background-color 0.2s;
+}
+
+.chat-user:hover,
+.chat-assistant:hover {
+    background-color: #eef2ff;
+}
+
+/* Code Blocks */
+pre code {
+    font-family: Consolas, Menlo, monospace;
+    font-size: 0.85rem;
+}
+
+/* Tables (Data Previews & Summaries) */
+#preview table,
+#summary table,
+#result_html table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#preview table th,
+#summary table th,
+#result_html table th {
+    background-color: #f1f5f9;
+    font-weight: 600;
+    padding: 8px;
+}
+
+#preview table td,
+#summary table td,
+#result_html table td {
+    border-top: 1px solid #e2e8f0;
+    padding: 8px;
+}
+
+/* Auto Plots Container */
+#autoplots img {
+    border-radius: 6px;
+}
+
+/* Details Tag Style */
+details summary {
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 4px;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+}
+details[open] summary {
+    background-color: #e2e8f0;
+}

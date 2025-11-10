@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Search</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-gray-100 to-blue-50 min-h-screen p-6">
+  <div class="max-w-6xl mx-auto space-y-6">
+    <!-- Header -->
+    <div class="bg-white p-6 rounded-xl shadow flex items-center space-x-4">
+      <img src="https://img.icons8.com/color/96/graph.png" alt="Data Icon" class="w-12 h-12">
+      <div>
+        <h1 class="text-3xl font-bold text-blue-700">📊 Search Engine</h1>
+        <p class="text-gray-600">Ask smart questions.</p>
+      </div>
+    </div>
+
+    <!-- Message Alert -->
+    {% if message %}
+      <div class="bg-red-100 border-l-4 border-red-500 text-red-800 p-4 rounded" role="alert">
+        <strong class="font-bold">Error:</strong> {{ message }}
+      </div>
+    {% endif %}
+
+    <!-- Search Form -->
+    <form method="POST" enctype="multipart/form-data" class="bg-white p-6 rounded-xl shadow space-y-5">
+      <div class="space-y-2">
+        <label for="question" class="block font-semibold text-gray-700">Question</label>
+        <input type="text" id="question" name="question" placeholder="Enter your question" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" required />
+      </div>
+      <div class="space-y-2">
+        <label for="api_key" class="block font-semibold text-gray-700">🔐 API Key</label>
+        <input type="password" id="api_key" name="api_key" placeholder="Enter your API Key" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" required />
+      </div>
+      
+      <button type="submit" class="w-full bg-blue-700 text-white py-3 rounded-lg hover:bg-blue-800 transition duration-200 font-semibold">
+        🚀 Get Answers
+      </button>
+    </form>
+
+    <!-- Search Response -->
+    {% if response %}
+      <div class="bg-white p-6 rounded-xl shadow">
+        <h2 class="text-xl font-semibold text-blue-700 mb-4">Answer</h2>
+        <div class="overflow-x-auto border border-gray-200 rounded max-w-full">
+          {{ response | safe }}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>
